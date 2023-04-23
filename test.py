@@ -89,7 +89,7 @@ logging.basicConfig(
 LOGS = logging.getLogger(__name__)
 
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.تحديث"))
+@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.تحديث"))
 async def _(event):
 
     sandy = await event.edit(
@@ -108,7 +108,7 @@ async def _(event):
     except Exception as e:
         LOGS.error(e)
     try:
-        await fifthon.disconnect()
+        await sedthon.disconnect()
     except CancelledError:
         pass
     except Exception as e:
