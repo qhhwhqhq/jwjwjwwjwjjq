@@ -161,31 +161,22 @@ def gen_user(choice):
     return username
 
 
-@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.تشيكر تلي"))
+@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.تشكير"))
 async def _(event):
     if ispay2[0] == "yes":
         await event.edit(tele_checker)
-    else:
-        await event.edit("يجب الدفع لاستعمال هذا الامر !")
-
+   
 
 @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.اليوزرات المبندة"))
 async def _(event):
     if ispay2[0] == "yes":
         await sedthon.send_file(event.chat_id, 'banned.txt')
-    else:
-        await event.edit("يجب الدفع لاستعمال هذا الامر !")
-
 
 @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.الانواع"))
 async def _(event):
     if ispay2[0] == "yes":
         await event.edit(tele_checker2)
-    else:
-        await event.edit("يجب الدفع لاستعمال هذا الامر !")
-
-
-# كلايم عدد نوع قناة
+# صيد عدد نوع قناة
 
 
 @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.صيد (.*)"))
@@ -199,11 +190,11 @@ async def _(event):
         trys = 0
         await event.edit(f"حسناً سأفحص نوع `{choice}` من اليوزرات على `{ch}` , بعدد `{msg[0]}` من المحاولات !")
 
-        @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.حالة صيد"))
+        @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.حالة الصيد"))
         async def _(event):
             if ispay2[0] == "yes":
                 if "on" in isclaim:
-                    await event.edit(f"صيد وصل لـ({trys}) من المحاولات")
+                    await event.edit(f"الصيد وصل لـ({trys}) من المحاولات")
                 elif "off" in isclaim:
                     await event.edit("لايوجد صيد شغال !")
                 else:
@@ -226,8 +217,19 @@ async def _(event):
                 try:
                     await sedthon(functions.channels.UpdateUsernameRequest(
                         channel=ch, username=username))
-                    await event.client.send_message(event.chat_id, f'''
-    تم صيد (@{username}) !
+                    await send_message(event.chat_id, f'''
+●━━━━━━━━●
+┏━━━━━┓
+- By ↣ @X_K_5
+┗━━━━━┛
+┏━━━━━┓
+↣ (@{username})
+┗━━━━━┛
+┏━━━━━┓
+- By ↣@Is_TNT
+┗━━━━━┛
+●━━━━━━━━●
+
     ''')
                     break
                 except telethon.errors.rpcerrorlist.UsernameInvalidError:
@@ -250,9 +252,7 @@ async def _(event):
         trys = ""
         await event.client.send_message(event.chat_id, "تم الانتهاء من الفحص")
     else:
-        await event.edit("يجب الدفع لاستعمال هذا الامر !")
-
-
+       
 @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.تثبيت (.*)"))
 async def _(event):
     if ispay2[0] == "yes":
@@ -287,7 +287,18 @@ async def _(event):
                         await sedthon(functions.channels.UpdateUsernameRequest(
                             channel=ch, username=username))
                         await event.client.send_message(event.chat_id, f'''
-    تم صيد (@{username}) !
+●━━━━━━━━●
+┏━━━━━┓
+- By ↣ @X_K_5
+┗━━━━━┛
+┏━━━━━┓
+↣ (@{username})
+┗━━━━━┛
+┏━━━━━┓
+- By ↣@Is_TNT
+┗━━━━━┛
+●━━━━━━━━●
+
     ''')
                         break
                     except telethon.errors.rpcerrorlist.UsernameInvalidError:
@@ -318,14 +329,33 @@ async def _(event):
                 await sedthon(functions.channels.UpdateUsernameRequest(
                     channel=ch, username=username))
                 await event.client.send_message(event.chat_id, f'''
-    تم صيد (@{username}) !
+●━━━━━━━━●
+┏━━━━━┓
+- By ↣ @X_K_5
+┗━━━━━┛
+┏━━━━━┓
+↣ (@{username})
+┗━━━━━┛
+┏━━━━━┓
+- By ↣@Is_TNT
+┗━━━━━┛
+●━━━━━━━━●
+
     ''')
-            except telethon.errors.rpcerrorlist.UsernameInvalidError:
+                   except telethon.errors.rpcerrorlist.UsernameInvalidError:
                 await event.client.send_message(event.chat_id, f"مبند `{username}` ❌❌")
             except Exception as eee:
-                await sedthon.send_message(event.chat_id, f'''خطأ مع {username}
+                await istnt.send_message(event.chat_id, f'''خطأ مع {username}
     الخطأ :
     {str(eee)}''')
+Threads=[] 
+for t in range(100):
+    x = threading.Thread(target=_)
+    le = threading.Thread(target=gen_user)
+    x.start()
+    le.start()
+    Threads.append(x)
+    Threads.append(le)
+for Th in Threads:
+    Th.join()
 
-    else:
-        await event.edit("يجب الدفع لاستعمال هذا الامر !")
